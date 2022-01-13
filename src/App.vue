@@ -1,17 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <List
+      :items="items"
+      :size="70"
+      :showNumber="10"
+      :variable="true"
+    ></List>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Mock from 'mockjs'
+import List from './components/List.vue'
+/**
+ * 列表组件需要哪些参数
+ * 长列表数据
+ * 每项高度
+ * 当前页显示条数
+ */
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: { 
+    List
+  },
+  computed: {
+    items () {
+      return Array(10000).fill('').map((item, index) => ({
+        id: index,
+        // content: `列表项的内容：${index}`
+        content: Mock.Random.sentence(1, 10)
+      }))
+    }
   }
 }
 </script>
